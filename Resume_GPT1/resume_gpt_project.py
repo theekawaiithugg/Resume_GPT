@@ -1,0 +1,155 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "8a49b068-0eaa-4129-b979-2c593e6664f7",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Paste the job description (press Enter twice when done):\n"
+     ]
+    },
+    {
+     "name": "stdin",
+     "output_type": "stream",
+     "text": [
+      " Under general supervision of the Research Data Supervisor (RD Sup) I, the incumbent will perform research and data analytics, with an emphasis on issues that affect marginalized communities to support the Department’s various research activities and mandated reports. The incumbent will collaborate with management and research specialists to determine the appropriate research methodology, collect and manage data using appropriate technology and security protocols, conduct statistical analyses to identify patterns, trends, and interpret the data to support recommendations; communicate findings to management, project leads, and internal stakeholders orally and in writing and create data visualizations to facilitate comprehension; summarize and clearly/concisely communicate findings to support scientific, programmatic, and policy decisions.\n",
+      " \n"
+     ]
+    },
+    {
+     "ename": "RateLimitError",
+     "evalue": "Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[31m---------------------------------------------------------------------------\u001b[39m",
+      "\u001b[31mRateLimitError\u001b[39m                            Traceback (most recent call last)",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[2]\u001b[39m\u001b[32m, line 79\u001b[39m\n\u001b[32m     77\u001b[39m resume = extract_resume_text(resume_path)  \u001b[38;5;66;03m# change filename to yours\u001b[39;00m\n\u001b[32m     78\u001b[39m job = get_job_description()\n\u001b[32m---> \u001b[39m\u001b[32m79\u001b[39m suggestions = \u001b[43mtailor_resume\u001b[49m\u001b[43m(\u001b[49m\u001b[43mresume\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mjob\u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m     80\u001b[39m \u001b[38;5;28mprint\u001b[39m(\u001b[33m\"\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[33m--- GPT Suggestions ---\u001b[39m\u001b[38;5;130;01m\\n\u001b[39;00m\u001b[33m\"\u001b[39m)\n\u001b[32m     81\u001b[39m \u001b[38;5;28mprint\u001b[39m(suggestions)\n",
+      "\u001b[36mCell\u001b[39m\u001b[36m \u001b[39m\u001b[32mIn[2]\u001b[39m\u001b[32m, line 56\u001b[39m, in \u001b[36mtailor_resume\u001b[39m\u001b[34m(resume_text, job_description)\u001b[39m\n\u001b[32m     43\u001b[39m     client = openai.OpenAI()  \u001b[38;5;66;03m# this uses your OPENAI_API_KEY environment variable\u001b[39;00m\n\u001b[32m     44\u001b[39m     prompt = \u001b[33mf\u001b[39m\u001b[33m\"\"\"\u001b[39m\n\u001b[32m     45\u001b[39m \u001b[33mYou are a career coach. Based on the resume below and the job description, suggest bullet points or sections to improve. \u001b[39m\n\u001b[32m     46\u001b[39m \u001b[33mHighlight specific keywords missing from the resume.\u001b[39m\n\u001b[32m   (...)\u001b[39m\u001b[32m     54\u001b[39m \u001b[33mGive suggestions in bullet form.\u001b[39m\n\u001b[32m     55\u001b[39m \u001b[33m\"\"\"\u001b[39m\n\u001b[32m---> \u001b[39m\u001b[32m56\u001b[39m     response = \u001b[43mclient\u001b[49m\u001b[43m.\u001b[49m\u001b[43mchat\u001b[49m\u001b[43m.\u001b[49m\u001b[43mcompletions\u001b[49m\u001b[43m.\u001b[49m\u001b[43mcreate\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m     57\u001b[39m \u001b[43m        \u001b[49m\u001b[43mmodel\u001b[49m\u001b[43m=\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mgpt-3.5-turbo\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\n\u001b[32m     58\u001b[39m \u001b[43m        \u001b[49m\u001b[43mmessages\u001b[49m\u001b[43m=\u001b[49m\u001b[43m[\u001b[49m\u001b[43m{\u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mrole\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43muser\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mcontent\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mprompt\u001b[49m\u001b[43m}\u001b[49m\u001b[43m]\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m     59\u001b[39m \u001b[43m        \u001b[49m\u001b[43mtemperature\u001b[49m\u001b[43m=\u001b[49m\u001b[32;43m0.5\u001b[39;49m\n\u001b[32m     60\u001b[39m \u001b[43m    \u001b[49m\u001b[43m)\u001b[49m\n\u001b[32m     61\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m response.choices[\u001b[32m0\u001b[39m].message.content\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mG:\\RadioConda\\envs\\py312-AI\\Lib\\site-packages\\openai\\_utils\\_utils.py:287\u001b[39m, in \u001b[36mrequired_args.<locals>.inner.<locals>.wrapper\u001b[39m\u001b[34m(*args, **kwargs)\u001b[39m\n\u001b[32m    285\u001b[39m             msg = \u001b[33mf\u001b[39m\u001b[33m\"\u001b[39m\u001b[33mMissing required argument: \u001b[39m\u001b[38;5;132;01m{\u001b[39;00mquote(missing[\u001b[32m0\u001b[39m])\u001b[38;5;132;01m}\u001b[39;00m\u001b[33m\"\u001b[39m\n\u001b[32m    286\u001b[39m     \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;167;01mTypeError\u001b[39;00m(msg)\n\u001b[32m--> \u001b[39m\u001b[32m287\u001b[39m \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[43mfunc\u001b[49m\u001b[43m(\u001b[49m\u001b[43m*\u001b[49m\u001b[43margs\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43m*\u001b[49m\u001b[43m*\u001b[49m\u001b[43mkwargs\u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mG:\\RadioConda\\envs\\py312-AI\\Lib\\site-packages\\openai\\resources\\chat\\completions\\completions.py:1087\u001b[39m, in \u001b[36mCompletions.create\u001b[39m\u001b[34m(self, messages, model, audio, frequency_penalty, function_call, functions, logit_bias, logprobs, max_completion_tokens, max_tokens, metadata, modalities, n, parallel_tool_calls, prediction, presence_penalty, reasoning_effort, response_format, seed, service_tier, stop, store, stream, stream_options, temperature, tool_choice, tools, top_logprobs, top_p, user, web_search_options, extra_headers, extra_query, extra_body, timeout)\u001b[39m\n\u001b[32m   1044\u001b[39m \u001b[38;5;129m@required_args\u001b[39m([\u001b[33m\"\u001b[39m\u001b[33mmessages\u001b[39m\u001b[33m\"\u001b[39m, \u001b[33m\"\u001b[39m\u001b[33mmodel\u001b[39m\u001b[33m\"\u001b[39m], [\u001b[33m\"\u001b[39m\u001b[33mmessages\u001b[39m\u001b[33m\"\u001b[39m, \u001b[33m\"\u001b[39m\u001b[33mmodel\u001b[39m\u001b[33m\"\u001b[39m, \u001b[33m\"\u001b[39m\u001b[33mstream\u001b[39m\u001b[33m\"\u001b[39m])\n\u001b[32m   1045\u001b[39m \u001b[38;5;28;01mdef\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34mcreate\u001b[39m(\n\u001b[32m   1046\u001b[39m     \u001b[38;5;28mself\u001b[39m,\n\u001b[32m   (...)\u001b[39m\u001b[32m   1084\u001b[39m     timeout: \u001b[38;5;28mfloat\u001b[39m | httpx.Timeout | \u001b[38;5;28;01mNone\u001b[39;00m | NotGiven = NOT_GIVEN,\n\u001b[32m   1085\u001b[39m ) -> ChatCompletion | Stream[ChatCompletionChunk]:\n\u001b[32m   1086\u001b[39m     validate_response_format(response_format)\n\u001b[32m-> \u001b[39m\u001b[32m1087\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43m_post\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m   1088\u001b[39m \u001b[43m        \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43m/chat/completions\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m,\u001b[49m\n\u001b[32m   1089\u001b[39m \u001b[43m        \u001b[49m\u001b[43mbody\u001b[49m\u001b[43m=\u001b[49m\u001b[43mmaybe_transform\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m   1090\u001b[39m \u001b[43m            \u001b[49m\u001b[43m{\u001b[49m\n\u001b[32m   1091\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmessages\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmessages\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1092\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmodel\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmodel\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1093\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43maudio\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43maudio\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1094\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mfrequency_penalty\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mfrequency_penalty\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1095\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mfunction_call\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mfunction_call\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1096\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mfunctions\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mfunctions\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1097\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mlogit_bias\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mlogit_bias\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1098\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mlogprobs\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mlogprobs\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1099\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmax_completion_tokens\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmax_completion_tokens\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1100\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmax_tokens\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmax_tokens\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1101\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmetadata\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmetadata\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1102\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mmodalities\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mmodalities\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1103\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mn\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mn\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1104\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mparallel_tool_calls\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mparallel_tool_calls\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1105\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mprediction\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mprediction\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1106\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mpresence_penalty\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mpresence_penalty\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1107\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mreasoning_effort\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mreasoning_effort\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1108\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mresponse_format\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mresponse_format\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1109\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mseed\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mseed\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1110\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mservice_tier\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mservice_tier\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1111\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstop\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mstop\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1112\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstore\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mstore\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1113\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstream\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mstream\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1114\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mstream_options\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mstream_options\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1115\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mtemperature\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mtemperature\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1116\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mtool_choice\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mtool_choice\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1117\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mtools\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mtools\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1118\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mtop_logprobs\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mtop_logprobs\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1119\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mtop_p\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mtop_p\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1120\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43muser\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43muser\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1121\u001b[39m \u001b[43m                \u001b[49m\u001b[33;43m\"\u001b[39;49m\u001b[33;43mweb_search_options\u001b[39;49m\u001b[33;43m\"\u001b[39;49m\u001b[43m:\u001b[49m\u001b[43m \u001b[49m\u001b[43mweb_search_options\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1122\u001b[39m \u001b[43m            \u001b[49m\u001b[43m}\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1123\u001b[39m \u001b[43m            \u001b[49m\u001b[43mcompletion_create_params\u001b[49m\u001b[43m.\u001b[49m\u001b[43mCompletionCreateParamsStreaming\u001b[49m\n\u001b[32m   1124\u001b[39m \u001b[43m            \u001b[49m\u001b[38;5;28;43;01mif\u001b[39;49;00m\u001b[43m \u001b[49m\u001b[43mstream\u001b[49m\n\u001b[32m   1125\u001b[39m \u001b[43m            \u001b[49m\u001b[38;5;28;43;01melse\u001b[39;49;00m\u001b[43m \u001b[49m\u001b[43mcompletion_create_params\u001b[49m\u001b[43m.\u001b[49m\u001b[43mCompletionCreateParamsNonStreaming\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1126\u001b[39m \u001b[43m        \u001b[49m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1127\u001b[39m \u001b[43m        \u001b[49m\u001b[43moptions\u001b[49m\u001b[43m=\u001b[49m\u001b[43mmake_request_options\u001b[49m\u001b[43m(\u001b[49m\n\u001b[32m   1128\u001b[39m \u001b[43m            \u001b[49m\u001b[43mextra_headers\u001b[49m\u001b[43m=\u001b[49m\u001b[43mextra_headers\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mextra_query\u001b[49m\u001b[43m=\u001b[49m\u001b[43mextra_query\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mextra_body\u001b[49m\u001b[43m=\u001b[49m\u001b[43mextra_body\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mtimeout\u001b[49m\u001b[43m=\u001b[49m\u001b[43mtimeout\u001b[49m\n\u001b[32m   1129\u001b[39m \u001b[43m        \u001b[49m\u001b[43m)\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1130\u001b[39m \u001b[43m        \u001b[49m\u001b[43mcast_to\u001b[49m\u001b[43m=\u001b[49m\u001b[43mChatCompletion\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1131\u001b[39m \u001b[43m        \u001b[49m\u001b[43mstream\u001b[49m\u001b[43m=\u001b[49m\u001b[43mstream\u001b[49m\u001b[43m \u001b[49m\u001b[38;5;129;43;01mor\u001b[39;49;00m\u001b[43m \u001b[49m\u001b[38;5;28;43;01mFalse\u001b[39;49;00m\u001b[43m,\u001b[49m\n\u001b[32m   1132\u001b[39m \u001b[43m        \u001b[49m\u001b[43mstream_cls\u001b[49m\u001b[43m=\u001b[49m\u001b[43mStream\u001b[49m\u001b[43m[\u001b[49m\u001b[43mChatCompletionChunk\u001b[49m\u001b[43m]\u001b[49m\u001b[43m,\u001b[49m\n\u001b[32m   1133\u001b[39m \u001b[43m    \u001b[49m\u001b[43m)\u001b[49m\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mG:\\RadioConda\\envs\\py312-AI\\Lib\\site-packages\\openai\\_base_client.py:1256\u001b[39m, in \u001b[36mSyncAPIClient.post\u001b[39m\u001b[34m(self, path, cast_to, body, options, files, stream, stream_cls)\u001b[39m\n\u001b[32m   1242\u001b[39m \u001b[38;5;28;01mdef\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[34mpost\u001b[39m(\n\u001b[32m   1243\u001b[39m     \u001b[38;5;28mself\u001b[39m,\n\u001b[32m   1244\u001b[39m     path: \u001b[38;5;28mstr\u001b[39m,\n\u001b[32m   (...)\u001b[39m\u001b[32m   1251\u001b[39m     stream_cls: \u001b[38;5;28mtype\u001b[39m[_StreamT] | \u001b[38;5;28;01mNone\u001b[39;00m = \u001b[38;5;28;01mNone\u001b[39;00m,\n\u001b[32m   1252\u001b[39m ) -> ResponseT | _StreamT:\n\u001b[32m   1253\u001b[39m     opts = FinalRequestOptions.construct(\n\u001b[32m   1254\u001b[39m         method=\u001b[33m\"\u001b[39m\u001b[33mpost\u001b[39m\u001b[33m\"\u001b[39m, url=path, json_data=body, files=to_httpx_files(files), **options\n\u001b[32m   1255\u001b[39m     )\n\u001b[32m-> \u001b[39m\u001b[32m1256\u001b[39m     \u001b[38;5;28;01mreturn\u001b[39;00m cast(ResponseT, \u001b[38;5;28;43mself\u001b[39;49m\u001b[43m.\u001b[49m\u001b[43mrequest\u001b[49m\u001b[43m(\u001b[49m\u001b[43mcast_to\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mopts\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mstream\u001b[49m\u001b[43m=\u001b[49m\u001b[43mstream\u001b[49m\u001b[43m,\u001b[49m\u001b[43m \u001b[49m\u001b[43mstream_cls\u001b[49m\u001b[43m=\u001b[49m\u001b[43mstream_cls\u001b[49m\u001b[43m)\u001b[49m)\n",
+      "\u001b[36mFile \u001b[39m\u001b[32mG:\\RadioConda\\envs\\py312-AI\\Lib\\site-packages\\openai\\_base_client.py:1044\u001b[39m, in \u001b[36mSyncAPIClient.request\u001b[39m\u001b[34m(self, cast_to, options, stream, stream_cls)\u001b[39m\n\u001b[32m   1041\u001b[39m             err.response.read()\n\u001b[32m   1043\u001b[39m         log.debug(\u001b[33m\"\u001b[39m\u001b[33mRe-raising status error\u001b[39m\u001b[33m\"\u001b[39m)\n\u001b[32m-> \u001b[39m\u001b[32m1044\u001b[39m         \u001b[38;5;28;01mraise\u001b[39;00m \u001b[38;5;28mself\u001b[39m._make_status_error_from_response(err.response) \u001b[38;5;28;01mfrom\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;28;01mNone\u001b[39;00m\n\u001b[32m   1046\u001b[39m     \u001b[38;5;28;01mbreak\u001b[39;00m\n\u001b[32m   1048\u001b[39m \u001b[38;5;28;01massert\u001b[39;00m response \u001b[38;5;129;01mis\u001b[39;00m \u001b[38;5;129;01mnot\u001b[39;00m \u001b[38;5;28;01mNone\u001b[39;00m, \u001b[33m\"\u001b[39m\u001b[33mcould not resolve response (should never happen)\u001b[39m\u001b[33m\"\u001b[39m\n",
+      "\u001b[31mRateLimitError\u001b[39m: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+     ]
+    }
+   ],
+   "source": [
+    "##Alexis Cynthia Martinez2025 \n",
+    "# 2025 Project 1\n",
+    "import openai\n",
+    "import PyPDF2\n",
+    "import os\n",
+    "from docx import Document\n",
+    "from dotenv import load_dotenv\n",
+    "\n",
+    "# STEP 1: Load your OpenAI API key\n",
+    "load_dotenv()\n",
+    "openai.api_key = os.getenv(\"OPENAI_API_KEY\")\n",
+    "\n",
+    "# STEP 2: Read your resume\n",
+    "def extract_resume_text(file_path):\n",
+    "    _, ext = os.path.splitext(file_path.lower())\n",
+    "\n",
+    "    if ext == '.pdf':\n",
+    "        return extract_resume_text_pdf(file_path)\n",
+    "    elif ext == '.docx':\n",
+    "        return extract_resume_text_docx(file_path)\n",
+    "    elif ext == '.doc':\n",
+    "        print(\"⚠️ Warning: .doc files are legacy. Trying to open as .docx...\")\n",
+    "        return extract_resume_text_docx(file_path)  # May fail on older .doc formats\n",
+    "    elif ext == '.txt':\n",
+    "        with open(file_path, 'r', encoding='utf-8') as f:\n",
+    "            return f.read()\n",
+    "    else:\n",
+    "        raise ValueError(f\"Unsupported file type: {ext}\")\n",
+    "\n",
+    "# STEP 3: Paste a job description\n",
+    "def get_job_description():\n",
+    "    print(\"Paste the job description (press Enter twice when done):\")\n",
+    "    lines = []\n",
+    "    while True:\n",
+    "        line = input()\n",
+    "        if line == \"\":\n",
+    "            break\n",
+    "        lines.append(line)\n",
+    "    return \"\\n\".join(lines)\n",
+    "\n",
+    "# STEP 4: Ask GPT to tailor resume\n",
+    "def tailor_resume(resume_text, job_description):\n",
+    "    client = openai.OpenAI()  # this uses your OPENAI_API_KEY environment variable\n",
+    "    prompt = f\"\"\"\n",
+    "You are a career coach. Based on the resume below and the job description, suggest bullet points or sections to improve. \n",
+    "Highlight specific keywords missing from the resume.\n",
+    "\n",
+    "--- RESUME ---\n",
+    "{resume_text}\n",
+    "\n",
+    "--- JOB DESCRIPTION ---\n",
+    "{job_description}\n",
+    "\n",
+    "Give suggestions in bullet form.\n",
+    "\"\"\"\n",
+    "    response = client.chat.completions.create(\n",
+    "        model=\"gpt-3.5-turbo\",\n",
+    "        messages=[{\"role\": \"user\", \"content\": prompt}],\n",
+    "        temperature=0.5\n",
+    "    )\n",
+    "    return response.choices[0].message.content\n",
+    "\n",
+    "#Helper functions for extractions|\n",
+    "def extract_resume_text_docx(file_path):\n",
+    "    doc = Document(file_path)\n",
+    "    return \"\\n\".join([para.text for para in doc.paragraphs])\n",
+    "\n",
+    "def extract_resume_text_pdf(file_path):\n",
+    "    with open(file_path, 'rb') as file:\n",
+    "        reader = PyPDF2.PdfReader(file)\n",
+    "        return \"\\n\".join([page.extract_text() for page in reader.pages if page.extract_text()])\n",
+    "\n",
+    "\n",
+    "# MAIN\n",
+    "if __name__ == \"__main__\":\n",
+    "    resume_path = r\"C:\\Users\\Thugg Kawaii\\Downloads\\Alexis_Martinez_Resume_2025.docx\"\n",
+    "    resume = extract_resume_text(resume_path)  # change filename to yours\n",
+    "    job = get_job_description()\n",
+    "    suggestions = tailor_resume(resume, job)\n",
+    "    print(\"\\n--- GPT Suggestions ---\\n\")\n",
+    "    print(suggestions)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1a6b5261-0d69-4ba7-adf8-58cd9fe93066",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
